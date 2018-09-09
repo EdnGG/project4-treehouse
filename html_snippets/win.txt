@@ -4,4 +4,4 @@
     <p class="message"></p>
     <a href="#" class="button">New game</a>
   </header>
-</div>
+</div> 
