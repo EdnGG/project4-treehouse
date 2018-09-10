@@ -53,8 +53,7 @@ const liBoxes = ulBoxes.querySelectorAll('li');
     }
 // Here's the event "mouseover"
     $('.box').on('mouseover', (e) => {
-        //  let that = $(this).first().attr('id');
-        //let that = e.target.id;
+        
         console.log('mouseover works');
         if ($('#player1').hasClass('active')) {
             $(e.target).css('background-image', 'url(../img/o.svg)');
@@ -67,49 +66,22 @@ const liBoxes = ulBoxes.querySelectorAll('li');
             
         }
     });
+
+// Here's the event "mouseover"
+
     $('.box').on('mouseout', (e) => {
 
-        console.log('mouseout works');
+        //console.log('mouseout works');
             $(e.target).css('background-image', 'none');
     });
 
-$('.box').on('click', () => {
+// dando click a los elemntos <li> de la lista <ul>
 
-switchPlayer()
+    $('.box').on('click', () => {
+            switchPlayer();
+    });
 
-})
-
-
-    //  $('.box').on('mouseover keypress',  (e)=> {
-    //     //  let that = $(this).first().attr('id');
-    //     let that = e.target.id;
-
-    //      console.log(that);
-         
-    //      if ($('#player1').hasClass('active')) {
-    //             $(e.target).css('background-image', 'url(../img/o.svg)');
-    //             //$('#player2').removeClass('active')
-    //      } else if ($('#player2').hasClass('active')) {
-    //             $(e.target).css('background-image', 'url(../img/x.svg)');
-    //             //$('#player1').removeClass('active')
-
-    //     }
-    // });
-
-
-    // $('.box').on('mouseout', (e) => {
-         
-    //     let that = e.target.id;
-
-    //         if ($('#player1').hasClass('active')) {
-    //             $(that).css('background-color', 'EFEFEF');
-            
-    //         } else if ($('#player2').hasClass('active')){
-    //             $(that).css('background-color', 'EFEFEF');
-
-    //         }
-    //     //console.log(square2);
-    // })
+//Funcion que intercambia el turno del jugador
     const switchPlayer = () => {
         if ($('#player1').hasClass('active')) {
             $('#player1').removeClass('active');
@@ -119,20 +91,13 @@ switchPlayer()
             $('#player1').addClass('active');
         }
     }
-   $('.button').on('click', (e) => {
+
+   $('.button').on('click', () => {
            if (valName() ) {
                 startGame(); 
-                // switchPlayer(); 
-                return true;
            }           
-                e.preventDefault();      
-        });
-
-   
-//     const boxes = document.querySelectorAll('.box');   
-
-
-    
+    });
+       
     const winningCombos = [
         [0, 1, 2],
         [3, 4, 5],
@@ -143,6 +108,9 @@ switchPlayer()
         [0, 4, 8],
         [2, 4, 6]
     ];
+
+    let player1 = [];
+    let player2 = [];
 
        
 
