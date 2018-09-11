@@ -66,39 +66,80 @@ const liBoxes = ulBoxes.querySelectorAll('li');
             
         }
     });
-
-// Here's the event "mouseover"
-
+                // Here's the event "mouseover"
     $('.box').on('mouseout', (e) => {
 
-        //console.log('mouseout works');
+        console.log('mouseout works');
             $(e.target).css('background-image', 'none');
     });
+                // dando click a los elemntos <li> de la lista <ul>
+$('.box').on('click',  (e) => {
+        console.log(e.target.id)
+        
+        switchP();
 
-// dando click a los elemntos <li> de la lista <ul>
-
-    $('.box').on('click', () => {
-            switchPlayer();
+    // let li = e.target.id;
+    // if ($('#player1').hasClass('active')) {
+    //     $(li).addClass('box-filled-1');
+    // } else if ($('#player2').hasClass('active')) {
+    //     $(li).addClass('box-filled-2');
+    // }
+        //boxElement();
+        // if ($('#player1').hasClass('active')) {
+        //      $(e.target.id).addClass('box-filled-1');
+        
+        // } else {
+        //      $('#player2').addClass('active') 
+        //      $(e.target.id).addClass('box-filled-2');
+        //  }
+        
     });
 
-//Funcion que intercambia el turno del jugador
-    const switchPlayer = () => {
+    const boxElement = (e) => {
+        let li = e.target.id;
         if ($('#player1').hasClass('active')) {
+            $(li).addClass('box-filled-1');
+        } else if ($('#player2').hasClass('active')) {
+            $(li).addClass('box-filled-2');
+        }
+    }
+
+//Funcion que intercambia el turno del jugador
+    const switchP = (e) => {
+        let li = e.target.id;
+        if ($('#player1').hasClass('active')) {
+            $(li).addClass('box-filled-1');
             $('#player1').removeClass('active');
             $('#player2').addClass('active');
+            
+        } else {
+            $('#player2').removeClass('active');
+            $('#player1').addClass('active');
+            
+        }  
+    }
+
+    /*
+    const switchPlayer = (e) => {
+        if ($('#player1').hasClass('active')) {
+            $(e.target.id).css('background-image', 'url(../img/x.svg)');
+            $('#player1').removeClass('active');
+            $('#player2').addClass('active');
+
         } else {
             $('#player2').removeClass('active');
             $('#player1').addClass('active');
         }
     }
-
-   $('.button').on('click', () => {
+    */
+   
+    $('.button').on('click', () => {
            if (valName() ) {
                 startGame(); 
            }           
     });
        
-    const winningCombos = [
+    const combos = [
         [0, 1, 2],
         [3, 4, 5],
         [6, 7, 8],
