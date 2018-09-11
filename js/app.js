@@ -72,43 +72,38 @@ const liBoxes = ulBoxes.querySelectorAll('li');
         console.log('mouseout works');
             $(e.target).css('background-image', 'none');
     });
+
+
                 // dando click a los elemntos <li> de la lista <ul>
 $('.box').on('click',  (e) => {
         console.log(e.target.id)
         
+        boxElement(e);
         switchP();
 
-    // let li = e.target.id;
     // if ($('#player1').hasClass('active')) {
-    //     $(li).addClass('box-filled-1');
+    //     $(e.target).addClass('box-filled-1').css('background-image', 'url(../img/o.svg)');
     // } else if ($('#player2').hasClass('active')) {
-    //     $(li).addClass('box-filled-2');
+    //     $(e.target).addClass('box-filled-2').css('background-image', 'url(../img/x.svg)');
     // }
-        //boxElement();
-        // if ($('#player1').hasClass('active')) {
-        //      $(e.target.id).addClass('box-filled-1');
-        
-        // } else {
-        //      $('#player2').addClass('active') 
-        //      $(e.target.id).addClass('box-filled-2');
-        //  }
-        
-    });
 
-    const boxElement = (e) => {
-        let li = e.target.id;
+
+  });
+const boxElement = (e) => {
+      
         if ($('#player1').hasClass('active')) {
-            $(li).addClass('box-filled-1');
+            $(e.target).addClass('box-filled-1').css('background-image', 'url(../img/o.svg)');
         } else if ($('#player2').hasClass('active')) {
-            $(li).addClass('box-filled-2');
+            $(e.target).addClass('box-filled-2').css('background-image', 'url(../img/x.svg)');
         }
     }
 
 //Funcion que intercambia el turno del jugador
-    const switchP = (e) => {
-        let li = e.target.id;
+
+const switchP = (e) => {
+    
         if ($('#player1').hasClass('active')) {
-            $(li).addClass('box-filled-1');
+           
             $('#player1').removeClass('active');
             $('#player2').addClass('active');
             
@@ -119,19 +114,8 @@ $('.box').on('click',  (e) => {
         }  
     }
 
-    /*
-    const switchPlayer = (e) => {
-        if ($('#player1').hasClass('active')) {
-            $(e.target.id).css('background-image', 'url(../img/x.svg)');
-            $('#player1').removeClass('active');
-            $('#player2').addClass('active');
-
-        } else {
-            $('#player2').removeClass('active');
-            $('#player1').addClass('active');
-        }
-    }
-    */
+    
+   
    
     $('.button').on('click', () => {
            if (valName() ) {
