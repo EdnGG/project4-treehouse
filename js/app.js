@@ -68,29 +68,55 @@ const liBoxes = ulBoxes.querySelectorAll('li');
     });
                 // Here's the event "mouseover"
     $('.box').on('mouseout', (e) => {
+        if ($('#player1').hasClass('active')){
+            $('#player2').removeClass('active')
+            $(e.target).css('background-image', 'url(../img/o.svg)');
+           
+
+        } else if ($('#player2').hasClass('active')) {
+            $('#player1').removeClass('active')
+            $(e.target).css('background-image', 'url(../img/x.svg)');
+            
+        } else {
 
         console.log('mouseout works');
-            $(e.target).css('background-image', 'none');
+
+        $(e.target).css('background-image', 'none');
+
+        }
+        
     });
 
+    
 
                 // dando click a los elemntos <li> de la lista <ul>
 $('.box').on('click',  (e) => {
         console.log(e.target.id)
         
-        boxElement(e);
-        switchP();
+        boxElement(e); // function que al dar clic pone el caracter correspondiente al elemento seleccionado
+        switchP();  // Function que cambia entre jugador
+        fillingBox(e);
 
-    // if ($('#player1').hasClass('active')) {
-    //     $(e.target).addClass('box-filled-1').css('background-image', 'url(../img/o.svg)');
-    // } else if ($('#player2').hasClass('active')) {
-    //     $(e.target).addClass('box-filled-2').css('background-image', 'url(../img/x.svg)');
-    // }
+    });
 
+    const fillingBox = (e) => {
 
-  });
+        if ($('#player1').hasClass('active')) {
+            $(e.target).css('background-image', 'url(../img/o.svg)');
+            //$('#player2').removeClass('active')
+
+        } else if ($('#player2').hasClass('active')) {
+            $(e.target).css('background-image', 'url(../img/x.svg)');
+            //$('#player1').removeClass('active')
+
+        } else if ($('#player1').hasClass('active') === false && $('#player2').hasClass('active') === false) {
+            console.log('mouseout works');
+
+            $(e.target).css('background-image', 'none');
+        }
+    }
 const boxElement = (e) => {
-      
+     
         if ($('#player1').hasClass('active')) {
             $(e.target).addClass('box-filled-1').css('background-image', 'url(../img/o.svg)');
         } else if ($('#player2').hasClass('active')) {
@@ -99,8 +125,7 @@ const boxElement = (e) => {
     }
 
 //Funcion que intercambia el turno del jugador
-
-const switchP = (e) => {
+const switchP = () => {
     
         if ($('#player1').hasClass('active')) {
            
