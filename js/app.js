@@ -57,18 +57,31 @@ const liBoxes = ulBoxes.querySelectorAll('li');
     let player1 = [];
     let player2 = [];
 
+    // dando click a los elemntos <li> de la lista <ul>
+    $('.box').on('click', (e) => {
+        console.log(e.target.id)
+        console.log('click element works');
+        
+        switchP();  // Function que cambia entre jugador
+
+        fillingBox(e);
+        boxElement(e); // function que al dar clic pone el caracter correspondiente al elemento seleccionado
+        
+
+    });
+
 
 // Here's the event "mouseover"
     $('.box').on('mouseover', (e) => {
         
         console.log('mouseover works');
         if ($('#player1').hasClass('active')) {
-            $(e.target).css('background-image', 'url(../img/o.svg)');
+            $(e.target).css('background-image', 'url(./img/o.svg)');
             $('#player2').removeClass('active');
 
         }
           else  if ($('#player2').hasClass('active')) {
-                $(e.target).css('background-image', 'url(../img/x.svg)');
+                $(e.target).css('background-image', 'url(./img/x.svg)');
                 $('#player1').removeClass('active')
             
         }
@@ -78,11 +91,11 @@ const liBoxes = ulBoxes.querySelectorAll('li');
         
           if ($('#player1').hasClass('box.filled-1')) {
             $('#player2').removeClass('box.filled-2')
-            $(e.target).css('background-image', 'url(../img/x.svg)');
+            $(e.target).css('background-image', 'url(./img/x.svg)');
             
         } else if ($('#player2').hasClass('box.filled-2')) {
             $('#player1').removeClass('box.filled-1')
-            $(e.target).css('background-image', 'url(../img/o.svg)');
+            $(e.target).css('background-image', 'url(./img/o.svg)');
         } else  if (!$('#player1').hasClass('box.filled-1') && !$('#player2').hasClass('box.filled-2')) {
 
             console.log('mouseout works');
@@ -92,31 +105,20 @@ const liBoxes = ulBoxes.querySelectorAll('li');
         
     });
 
-                // dando click a los elemntos <li> de la lista <ul>
-$('.box').on('click',  (e) => {
-        console.log(e.target.id)
-        console.log('click element works');
-        boxElement(e); // function que al dar clic pone el caracter correspondiente al elemento seleccionado
-        switchP();  // Function que cambia entre jugador
-        fillingBox(e);
-
-    });
-
-
-    const fillingBox = (e) => {
+     const fillingBox = (e) => {
 
         console.log('fillingBox function works');
 
         
         if ($('#player1').hasClass('active')) {
             $('#player1').addClass('box.filled-1')
-            $(e.target).css('background-image', 'url(../img/o.svg)');
+            $(e.target).css('background-image', 'url(./img/o.svg)');
             //$('#player2').removeClass('active')
 
         } else if ($('#player2').hasClass('active')) {
             $('#player2').addClass('box.filled-2')
 
-            $(e.target).css('background-image', 'url(../img/x.svg)');
+            $(e.target).css('background-image', 'url(./img/x.svg)');
             //$('#player1').removeClass('active')
 
         } else if (!$('#player1').hasClass('box-filled-1') && !$('#player2').hasClass('box-filled-2') === false) {
@@ -131,9 +133,9 @@ const boxElement = (e) => {
 
      
         if ($('#player1').hasClass('active')) {
-            $(e.target).addClass('box-filled-1').css('background-image', 'url(../img/o.svg)');
+            $(e.target).addClass('box-filled-1').css('background-image', 'url(./img/o.svg)');
         } else if ($('#player2').hasClass('active')) {
-            $(e.target).addClass('box-filled-2').css('background-image', 'url(../img/x.svg)');
+            $(e.target).addClass('box-filled-2').css('background-image', 'url(./img/x.svg)');
         }
     }
 
