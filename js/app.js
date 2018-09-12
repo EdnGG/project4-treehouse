@@ -51,6 +51,13 @@ const liBoxes = ulBoxes.querySelectorAll('li');
         box = liBoxes[i].id = i;
         console.log(box);
     }
+
+    let counter = 0;
+
+    let player1 = [];
+    let player2 = [];
+
+
 // Here's the event "mouseover"
     $('.box').on('mouseover', (e) => {
         
@@ -66,56 +73,62 @@ const liBoxes = ulBoxes.querySelectorAll('li');
             
         }
     });
-                // Here's the event "mouseover"
+                // Here's the event "mouseout"
     $('.box').on('mouseout', (e) => {
-        if ($('#player1').hasClass('active')){
-            $('#player2').removeClass('active')
-            $(e.target).css('background-image', 'url(../img/o.svg)');
-           
-
-        } else if ($('#player2').hasClass('active')) {
-            $('#player1').removeClass('active')
+        
+          if ($('#player1').hasClass('box.filled-1')) {
+            $('#player2').removeClass('box.filled-2')
             $(e.target).css('background-image', 'url(../img/x.svg)');
             
-        } else {
+        } else if ($('#player2').hasClass('box.filled-2')) {
+            $('#player1').removeClass('box.filled-1')
+            $(e.target).css('background-image', 'url(../img/o.svg)');
+        } else  if (!$('#player1').hasClass('box.filled-1') && !$('#player2').hasClass('box.filled-2')) {
 
-        console.log('mouseout works');
-
-        $(e.target).css('background-image', 'none');
-
+            console.log('mouseout works');
+            $(e.target).css('background-image', 'none');
         }
+
         
     });
-
-    
 
                 // dando click a los elemntos <li> de la lista <ul>
 $('.box').on('click',  (e) => {
         console.log(e.target.id)
-        
+        console.log('click element works');
         boxElement(e); // function que al dar clic pone el caracter correspondiente al elemento seleccionado
         switchP();  // Function que cambia entre jugador
         fillingBox(e);
 
     });
 
+
     const fillingBox = (e) => {
 
+        console.log('fillingBox function works');
+
+        
         if ($('#player1').hasClass('active')) {
+            $('#player1').addClass('box.filled-1')
             $(e.target).css('background-image', 'url(../img/o.svg)');
             //$('#player2').removeClass('active')
 
         } else if ($('#player2').hasClass('active')) {
+            $('#player2').addClass('box.filled-2')
+
             $(e.target).css('background-image', 'url(../img/x.svg)');
             //$('#player1').removeClass('active')
 
-        } else if ($('#player1').hasClass('active') === false && $('#player2').hasClass('active') === false) {
+        } else if (!$('#player1').hasClass('box-filled-1') && !$('#player2').hasClass('box-filled-2') === false) {
             console.log('mouseout works');
 
             $(e.target).css('background-image', 'none');
         }
     }
 const boxElement = (e) => {
+
+    console.log('boxElement function works');
+
      
         if ($('#player1').hasClass('active')) {
             $(e.target).addClass('box-filled-1').css('background-image', 'url(../img/o.svg)');
@@ -126,6 +139,9 @@ const boxElement = (e) => {
 
 //Funcion que intercambia el turno del jugador
 const switchP = () => {
+
+    console.log('switchPlayer function works');
+
     
         if ($('#player1').hasClass('active')) {
            
@@ -159,8 +175,7 @@ const switchP = () => {
         [2, 4, 6]
     ];
 
-    let player1 = [];
-    let player2 = [];
+    
 
        
 
