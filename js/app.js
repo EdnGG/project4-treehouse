@@ -65,7 +65,7 @@ const liBoxes = ulBoxes.querySelectorAll('li');
         switchP();  // Function que cambia entre jugador
 
         fillingBox(e);
-        //boxElement(e); // function que al dar clic pone el caracter correspondiente al elemento seleccionado
+        
         
 
     });
@@ -84,30 +84,24 @@ const liBoxes = ulBoxes.querySelectorAll('li');
                 $(e.target).css('background-image', 'url(./img/x.svg)');
                 $('#player1').removeClass('active')
             
-        } else if($(e.target).hasClass('box-filled-1')){
+        } else if ($('#player1').hasClass('active') && $(e.target).hasClass('box-filled-1')){
             $(e.target).css('background-image', 'url(./img/o.svg)');
-        } else if ($(e.target).hasClass('box-filled-2')) {
+        } else if ($('#player2').hasClass('active') && $(e.target).hasClass('box-filled-2')) {
             $(e.target).css('background-image', 'url(./img/x.svg)');
         }
     });
                 // Here's the event "mouseout"
     $('.box').on('mouseout', (e) => {
         
-        //   if ($('#player1').hasClass('box.filled-1')) {
-        //     $('#player2').removeClass('box.filled-2')
-        //     $(e.target).css('background-image', 'url(./img/x.svg)');
-            
-        // } else if ($('#player2').hasClass('box.filled-2')) {
-        //     $('#player1').removeClass('box.filled-1')
-        //     $(e.target).css('background-image', 'url(./img/o.svg)');
-        // } else  if (!$('#player1').hasClass('box.filled-1') && !$('#player2').hasClass('box.filled-2')) {
-
+       
             //console.log('mouseout works');
             if($(e.target).hasClass('box-filled-1')){
+                $(e.target).css('background-image', 'url(./img/o.svg)');
                 console.log("condicion filled-1 works");
             } else if ($(e.target).hasClass('box-filled-2')){
+                $(e.target).css('background-image', 'url(./img/x.svg)');
                 console.log("condicion filled-2 works");
-        //}
+        
             } 
             else {
                 console.log('else statement works')
@@ -123,17 +117,12 @@ const liBoxes = ulBoxes.querySelectorAll('li');
         
         if ($('#player1').hasClass('active')) {
             $(e.target).addClass('box-filled-1').css('background-image', 'url(./img/o.svg)');
-            // $('#player1').addClass('box.filled-1')
-            // $(e.target).css('background-image', 'url(./img/o.svg)');
-            //$('#player2').removeClass('active')
+           
             console.log('1');
 
         } else if ($('#player2').hasClass('active')) {
             $(e.target).addClass('box-filled-2').css('background-image', 'url(./img/x.svg)');
-            //$('#player2').addClass('box.filled-2')
-
-            //$(e.target).css('background-image', 'url(./img/x.svg)');
-            //$('#player1').removeClass('active')
+            
             console.log('2');
 
         } else {
