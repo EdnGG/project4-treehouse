@@ -59,13 +59,13 @@ const liBoxes = ulBoxes.querySelectorAll('li');
 
     // dando click a los elemntos <li> de la lista <ul>
     $('.box').on('click', (e) => {
-        console.log(e.target.id)
-        console.log('click element works');
+        console.log(`click element works  ${e.target.id}`);
+        
         
         switchP();  // Function que cambia entre jugador
 
         fillingBox(e);
-        boxElement(e); // function que al dar clic pone el caracter correspondiente al elemento seleccionado
+        //boxElement(e); // function que al dar clic pone el caracter correspondiente al elemento seleccionado
         
 
     });
@@ -84,55 +84,71 @@ const liBoxes = ulBoxes.querySelectorAll('li');
                 $(e.target).css('background-image', 'url(./img/x.svg)');
                 $('#player1').removeClass('active')
             
+        } else if($(e.target).hasClass('box-filled-1')){
+            $(e.target).css('background-image', 'url(./img/o.svg)');
+        } else if ($(e.target).hasClass('box-filled-2')) {
+            $(e.target).css('background-image', 'url(./img/x.svg)');
         }
     });
                 // Here's the event "mouseout"
     $('.box').on('mouseout', (e) => {
         
-          if ($('#player1').hasClass('box.filled-1')) {
-            $('#player2').removeClass('box.filled-2')
-            $(e.target).css('background-image', 'url(./img/x.svg)');
+        //   if ($('#player1').hasClass('box.filled-1')) {
+        //     $('#player2').removeClass('box.filled-2')
+        //     $(e.target).css('background-image', 'url(./img/x.svg)');
             
-        } else if ($('#player2').hasClass('box.filled-2')) {
-            $('#player1').removeClass('box.filled-1')
-            $(e.target).css('background-image', 'url(./img/o.svg)');
-        } else  if (!$('#player1').hasClass('box.filled-1') && !$('#player2').hasClass('box.filled-2')) {
+        // } else if ($('#player2').hasClass('box.filled-2')) {
+        //     $('#player1').removeClass('box.filled-1')
+        //     $(e.target).css('background-image', 'url(./img/o.svg)');
+        // } else  if (!$('#player1').hasClass('box.filled-1') && !$('#player2').hasClass('box.filled-2')) {
 
-            console.log('mouseout works');
-            $(e.target).css('background-image', 'none');
-        }
-
+            //console.log('mouseout works');
+            if($(e.target).hasClass('box-filled-1')){
+                console.log("condicion filled-1 works");
+            } else if ($(e.target).hasClass('box-filled-2')){
+                console.log("condicion filled-2 works");
+        //}
+            } else {
+                console.log('else statement works')
+                $(e.target).css('background-image', 'none');
+            }
         
     });
 
-     const fillingBox = (e) => {
+     const fillingBox = (e) => {  // esta funcion se ejecuta cuando se da click al tablero
 
         console.log('fillingBox function works');
 
         
         if ($('#player1').hasClass('active')) {
-            $('#player1').addClass('box.filled-1')
-            $(e.target).css('background-image', 'url(./img/o.svg)');
+            $(e.target).addClass('box-filled-1').css('background-image', 'url(./img/o.svg)');
+            // $('#player1').addClass('box.filled-1')
+            // $(e.target).css('background-image', 'url(./img/o.svg)');
             //$('#player2').removeClass('active')
+            console.log('1');
 
         } else if ($('#player2').hasClass('active')) {
-            $('#player2').addClass('box.filled-2')
+            $(e.target).addClass('box-filled-2').css('background-image', 'url(./img/o.svg)');
+            //$('#player2').addClass('box.filled-2')
 
-            $(e.target).css('background-image', 'url(./img/x.svg)');
+            //$(e.target).css('background-image', 'url(./img/x.svg)');
             //$('#player1').removeClass('active')
+            console.log('2');
 
-        } else if (!$('#player1').hasClass('box-filled-1') && !$('#player2').hasClass('box-filled-2') === false) {
-            console.log('mouseout works');
+        } else {
+         console.log('3');
 
-            $(e.target).css('background-image', 'none');
-        }
+         $(e.target).css('background-image', 'none');
+        // else if (!$('#player1').hasClass('box-filled-1') || !$('#player2').hasClass('box-filled-2') ) {
+        //     console.log('ccvcd');
+
+        //     $(e.target).css('background-image', 'none');
+         }
     }
 const boxElement = (e) => {
-
     console.log('boxElement function works');
 
-     
-        if ($('#player1').hasClass('active')) {
+     if ($('#player1').hasClass('active')) {
             $(e.target).addClass('box-filled-1').css('background-image', 'url(./img/o.svg)');
         } else if ($('#player2').hasClass('active')) {
             $(e.target).addClass('box-filled-2').css('background-image', 'url(./img/x.svg)');
