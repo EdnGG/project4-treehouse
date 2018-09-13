@@ -108,7 +108,8 @@ const liBoxes = ulBoxes.querySelectorAll('li');
             } else if ($(e.target).hasClass('box-filled-2')){
                 console.log("condicion filled-2 works");
         //}
-            } else {
+            } 
+            else {
                 console.log('else statement works')
                 $(e.target).css('background-image', 'none');
             }
@@ -128,7 +129,7 @@ const liBoxes = ulBoxes.querySelectorAll('li');
             console.log('1');
 
         } else if ($('#player2').hasClass('active')) {
-            $(e.target).addClass('box-filled-2').css('background-image', 'url(./img/o.svg)');
+            $(e.target).addClass('box-filled-2').css('background-image', 'url(./img/x.svg)');
             //$('#player2').addClass('box.filled-2')
 
             //$(e.target).css('background-image', 'url(./img/x.svg)');
