@@ -59,12 +59,10 @@ const liBoxes = ulBoxes.querySelectorAll('li');
 
     // dando click a los elemntos <li> de la lista <ul>
     $('.box').on('click', (e) => {
-        console.log(`click element works  ${e.target.id}`);
+        console.log(`element with ID ${e.target.id} clicked`);
         
-        
-        switchP();  // Function que cambia entre jugador
-
         fillingBox(e);
+        switchP(e);
         
         
 
@@ -72,69 +70,82 @@ const liBoxes = ulBoxes.querySelectorAll('li');
 
 
 // Here's the event "mouseover"
-    $('.box').on('mouseover', (e) => {
+const mouseOver = ()=> {
+$('.box').on('mouseover', (e) => {
         
-        console.log('mouseover works');
-        if ($('#player1').hasClass('active')) {
-            $(e.target).css('background-image', 'url(./img/o.svg)');
-            $('#player2').removeClass('active');
-
-        }
-          else  if ($('#player2').hasClass('active')) {
-                $(e.target).css('background-image', 'url(./img/x.svg)');
-                $('#player1').removeClass('active')
-            
-        } else if ($('#player1').hasClass('active') && $(e.target).hasClass('box-filled-1')){
-            $(e.target).css('background-image', 'url(./img/o.svg)');
-        } else if ($('#player2').hasClass('active') && $(e.target).hasClass('box-filled-2')) {
-            $(e.target).css('background-image', 'url(./img/x.svg)');
-        }
-    });
-                // Here's the event "mouseout"
-    $('.box').on('mouseout', (e) => {
-        
+    if (!$(e.target).hasClass('box-filled-1') && !$(e.target).hasClass('box-filled-2') ) { // negacion
        
-            //console.log('mouseout works');
+        if ($('#player1').hasClass('active') ) {
+            $(e.target).css('background-image', 'url(./img/o.svg)');
+            //$('#player2').removeClass('active');
+
+            if ($('#player1').hasClass('active') && $(e.target).hasClass('box-filled-1')) {
+                $(e.target).css('background-image', 'url(./img/o.svg)');
+            }
+        }
+        else if ($('#player2').hasClass('active') ) {
+                $(e.target).css('background-image', 'url(./img/x.svg)');
+                //$('#player1').removeClass('active')
+            
+        //} else
+            if ($('#player2').hasClass('active') && $(e.target).hasClass('box-filled-2')) {
+                $(e.target).css('background-image', 'url(./img/x.svg)');
+            }
+        }
+        // else if ($('#player1').hasClass('active') && $(e.target).hasClass('box-filled-1')){
+        //     $(e.target).css('background-image', 'url(./img/o.svg)');
+        //     console.log('else 2 statement works')
+        // } else if ($('#player2').hasClass('active') && $(e.target).hasClass('box-filled-2')) {
+        //     console.log('else 3 statement works')
+
+        //     $(e.target).css('background-image', 'url(./img/x.svg)');
+        // }
+    }
+  })
+}
+mouseOver()
+
+// Here's the event "mouseout"
+const mouseOut = () => { 
+$('.box').on('mouseout', (e) => {
+        if (!$(e.target).hasClass('box-filled-1') && !$(e.target).hasClass('box-filled-2')) {
             if($(e.target).hasClass('box-filled-1')){
                 $(e.target).css('background-image', 'url(./img/o.svg)');
                 console.log("condicion filled-1 works");
             } else if ($(e.target).hasClass('box-filled-2')){
                 $(e.target).css('background-image', 'url(./img/x.svg)');
                 console.log("condicion filled-2 works");
-        
-            } 
-            else {
+            } else {
                 console.log('else statement works')
                 $(e.target).css('background-image', 'none');
             }
-        
-    });
+        }
+    })
+}
 
-     const fillingBox = (e) => {  // esta funcion se ejecuta cuando se da click al tablero
-
-        console.log('fillingBox function works');
-
-        
+mouseOut()
+const fillingBox = (e) => {  // esta funcion se ejecuta cuando se da click al tablero
+    if (!$(e.target).hasClass('box-filled-1') && !$(e.target).hasClass('box-filled-2')) {   
+    
         if ($('#player1').hasClass('active')) {
             $(e.target).addClass('box-filled-1').css('background-image', 'url(./img/o.svg)');
-           
             console.log('1');
 
         } else if ($('#player2').hasClass('active')) {
             $(e.target).addClass('box-filled-2').css('background-image', 'url(./img/x.svg)');
-            
             console.log('2');
 
-        } else {
-         console.log('3');
+        } 
+        // else {
+        //  console.log('3');
 
-         $(e.target).css('background-image', 'none');
-        // else if (!$('#player1').hasClass('box-filled-1') || !$('#player2').hasClass('box-filled-2') ) {
-        //     console.log('ccvcd');
-
-        //     $(e.target).css('background-image', 'none');
-         }
+        //  $(e.target).css('background-image', 'none');
+        // // else if (!$('#player1').hasClass('box-filled-1') || !$('#player2').hasClass('box-filled-2') ) {
+        // //     console.log('ccvcd');
+        // //     $(e.target).css('background-image', 'none');
+        // }    
     }
+}
 const boxElement = (e) => {
     console.log('boxElement function works');
 
@@ -146,21 +157,22 @@ const boxElement = (e) => {
     }
 
 //Funcion que intercambia el turno del jugador
-const switchP = () => {
-
+const switchP = (e) => {
     console.log('switchPlayer function works');
-
-    
-        if ($('#player1').hasClass('active')) {
-           
-            $('#player1').removeClass('active');
-            $('#player2').addClass('active');
+        
+    //if (!$(e.target).hasClass('box-filled-1') && !$(e.target).hasClass('box-filled-2')) {
+            if ($('#player1').hasClass('active')) {
+                
+             $('#player1').removeClass('active');
+             $('#player2').addClass('active');
             
-        } else {
-            $('#player2').removeClass('active');
-            $('#player1').addClass('active');
+            } else {
+            //if ($('#player2').hasClass('active')) {
+                $('#player2').removeClass('active');
+                $('#player1').addClass('active');
             
-        }  
+            } 
+        //} 
     }
 
     
