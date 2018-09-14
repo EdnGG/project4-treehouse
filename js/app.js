@@ -177,27 +177,28 @@ const switchP = (e) => {
 
             }
         //} 
-    }const switchP = (e) => {
-    console.log('switchPlayer function works');
-        
-    //if (!$(e.target).hasClass('box-filled-1') && !$(e.target).hasClass('box-filled-2')) {
-            if ($('#player1').hasClass('active') ) {
-                
-             $('#player1').removeClass('active');
-             $('#player2').addClass('active');
-            
-            } else {
-            //if ($('#player2').hasClass('active')) {
-                $('#player2').removeClass('active');
-                $('#player1').addClass('active');
-            
-            } if ($('#player1').hasClass('active') && $(e.target).hasClass('box-filled-1')){
-                $('#player2').removeClass('active')
-            } else {
-                
-            }
-        //} 
     }
+    // const switchP = (e) => {
+    // console.log('switchPlayer function works');
+        
+    // //if (!$(e.target).hasClass('box-filled-1') && !$(e.target).hasClass('box-filled-2')) {
+    //         if ($('#player1').hasClass('active') ) {
+                
+    //          $('#player1').removeClass('active');
+    //          $('#player2').addClass('active');
+            
+    //         } else {
+    //         //if ($('#player2').hasClass('active')) {
+    //             $('#player2').removeClass('active');
+    //             $('#player1').addClass('active');
+            
+    //         } if ($('#player1').hasClass('active') && $(e.target).hasClass('box-filled-1')){
+    //             $('#player2').removeClass('active')
+    //         } else {
+                
+    //         }
+    //     //} 
+    // }
 
     
    
