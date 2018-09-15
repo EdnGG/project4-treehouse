@@ -52,20 +52,64 @@ const liBoxes = ulBoxes.querySelectorAll('li');
         console.log(box);
     }
 
-    let counter = 0;
+//  const ckeckWin = (e) => {
+        
+//         const li = document.querySelectorAll('li');
+//         console.log(li);
+//         for (let i = 0; i < i; i++ ){
+//             if (li.hasClass('box-filled1')){
 
-    let player1 = [];
-    let player2 = [];
 
+//             }
+
+//         }
+
+         
+//         let counter = 0;
+//         let player1 = [];
+//         let player2 = [];
+
+//         const combos = [
+//             [0, 1, 2],
+//             [3, 4, 5],
+//             [6, 7, 8],
+//             [0, 3, 6],
+//             [1, 4, 7],
+//             [2, 5, 8],
+//             [0, 4, 8],
+//             [2, 4, 6]
+//         ];
+//     }
+     
     // dando click a los elemntos <li> de la lista <ul>
     $('.box').on('click', (e) => {
         console.log(`element with ID ${e.target.id} clicked`);
         
-        fillingBox(e);
-        switchP(e);
-        
-        
+        if (!$(e.target).hasClass('box-filled-1') && !$(e.target).hasClass('box-filled-2')) { 
 
+            fillingBox(e);
+            switchP(e);
+        //checkWin()  
+        if ($('#player1').hasClass('active') ) {
+            if ($(e.target).hasClass('box-filled-1') && $(e.target).hasClass('box-filled-2') ) {  // Both have to be TRUE
+            $('#player2').addClass('active')
+            
+        } else {
+            $('#player1').addClass('active')
+        }
+    }
+
+        if ($('#player2').hasClass('active')) {
+            if ($(e.target).hasClass('box-filled-1') && $(e.target).hasClass('box-filled-2')) {  // Both have to be TRUE
+                $('#player1').addClass('active')
+
+            } else {
+                $('#player2').addClass('active')
+            }
+        }
+
+        
+    }
     });
 
 
@@ -77,7 +121,7 @@ $('.box').on('mouseover', (e) => {
        
         if ($('#player1').hasClass('active') ) {
             $(e.target).css('background-image', 'url(./img/o.svg)');
-            //$('#player2').removeClass('active');
+            
 
             if ($('#player1').hasClass('active') && $(e.target).hasClass('box-filled-1')) {
                 $(e.target).css('background-image', 'url(./img/o.svg)');
@@ -85,21 +129,12 @@ $('.box').on('mouseover', (e) => {
         }
         else if ($('#player2').hasClass('active') ) {
                 $(e.target).css('background-image', 'url(./img/x.svg)');
-                //$('#player1').removeClass('active')
-            
-        //} else
+                
             if ($('#player2').hasClass('active') && $(e.target).hasClass('box-filled-2')) {
                 $(e.target).css('background-image', 'url(./img/x.svg)');
             }
         }
-        // else if ($('#player1').hasClass('active') && $(e.target).hasClass('box-filled-1')){
-        //     $(e.target).css('background-image', 'url(./img/o.svg)');
-        //     console.log('else 2 statement works')
-        // } else if ($('#player2').hasClass('active') && $(e.target).hasClass('box-filled-2')) {
-        //     console.log('else 3 statement works')
-
-        //     $(e.target).css('background-image', 'url(./img/x.svg)');
-        // }
+       
     }
   })
 }
@@ -116,7 +151,7 @@ $('.box').on('mouseout', (e) => {
                 $(e.target).css('background-image', 'url(./img/x.svg)');
                 console.log("condicion filled-2 works");
             } else {
-                console.log('else statement works')
+                //console.log('else statement works')
                 $(e.target).css('background-image', 'none');
             }
         }
@@ -125,25 +160,25 @@ $('.box').on('mouseout', (e) => {
 
 mouseOut()
 const fillingBox = (e) => {  // esta funcion se ejecuta cuando se da click al tablero
+
+    let counter = 0;
+    let player1 = [];
+    let player2 = [];
+
     if (!$(e.target).hasClass('box-filled-1') && !$(e.target).hasClass('box-filled-2')) {   
     
         if ($('#player1').hasClass('active')) {
             $(e.target).addClass('box-filled-1').css('background-image', 'url(./img/o.svg)');
-            console.log('1');
+            player1.push(e.target.id); 
+            console.log(`1 ${player1}`);
 
         } else if ($('#player2').hasClass('active')) {
             $(e.target).addClass('box-filled-2').css('background-image', 'url(./img/x.svg)');
-            console.log('2');
+            player2.push(e.target.id);
+            console.log(`2 ${player2}`);
 
         } 
-        // else {
-        //  console.log('3');
-
-        //  $(e.target).css('background-image', 'none');
-        // // else if (!$('#player1').hasClass('box-filled-1') || !$('#player2').hasClass('box-filled-2') ) {
-        // //     console.log('ccvcd');
-        // //     $(e.target).css('background-image', 'none');
-        // }    
+       
     }
 }
 const boxElement = (e) => {
@@ -158,25 +193,29 @@ const boxElement = (e) => {
 
 //Funcion que intercambia el turno del jugador
 const switchP = (e) => {
+
+   
     console.log('switchPlayer function works');
         
     //if (!$(e.target).hasClass('box-filled-1') && !$(e.target).hasClass('box-filled-2')) {
             if ($('#player1').hasClass('active') ) {
-                
+                console.log('switchP 1')
              $('#player1').removeClass('active');
              $('#player2').addClass('active');
             
             } else {
             //if ($('#player2').hasClass('active')) {
+                console.log('switchP 2')
+
                 $('#player2').removeClass('active');
                 $('#player1').addClass('active');
             
             } if ($('#player1').hasClass('active') && $(e.target).hasClass('box-filled-1')){
-                console.log('if tercero funciona');
-                $('#player1').removeClass('active')
-            } else if ($('#player2').hasClass('active') && $(e.target).hasClass('box-filled-2')) {
-                console.log('if cuarto funciona');
+                console.log('switchP 3');
                 $('#player2').removeClass('active')
+            } else if ($('#player2').hasClass('active') && $(e.target).hasClass('box-filled-2')) {
+                console.log('switchP 4');
+                $('#player1').removeClass('active')
             }
         //} 
     }
@@ -197,9 +236,4 @@ const switchP = (e) => {
         [0, 4, 8],
         [2, 4, 6]
     ];
-
-    
-
-       
-
 });
