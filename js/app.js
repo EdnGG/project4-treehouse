@@ -49,46 +49,125 @@ const liBoxes = ulBoxes.querySelectorAll('li');
     for (let i = 0; i < liBoxes.length; i++) {
         let box;
         box = liBoxes[i].id = i;
-        console.log(box);
+        //console.log(box);
     }
 
-//  const ckeckWin = (e) => {
+ //const ckeckWin = (e) => {
+
+
+   
+     const ckeckWhoWon = (e) => {
+
+        const combos = [
+             [0, 1, 2],
+             [3, 4, 5],
+             [6, 7, 8],
+             [0, 3, 6],
+             [1, 4, 7],
+             [2, 5, 8],
+             [0, 4, 8],
+             [2, 4, 6]
+         ];
+playerClass1 = $(e.target).hasClass("box-filled-1");       
+playerClass2 = $(e.target).hasClass("box-filled-2");
+
+         const cuadricula = document.querySelectorAll('li.box');
+         let acum = 0;
+         for (let i = 0; i < combos.length; i++) { // Recorre el Array bidimensinal combos en el index del primer objeto
+             acum = 0;
+             for (let j = 0; j < combos[i].length; j++) { // Recorre el Array bidimensional combos el cual recorre el primer objetos del array 
+                 if (!$(cuadricula[combos[i][j]]).hasClass('box-filled-1')  ) {
+                    console.log('recorriendo el array combos')
+                        //acum++;
+                       break;
+                        //acum++;
+                 
+                if (acum === 3) {
+                // if () {} 
+                
+                console.log('winner');
+                 //winner
+                // break;
+                }
+             }
+            }
+      } 
+    }
         
-//         const li = document.querySelectorAll('li');
-//         console.log(li);
-//         for (let i = 0; i < i; i++ ){
-//             if (li.hasClass('box-filled1')){
-
-
-//             }
-
-//         }
-
-         
-//         let counter = 0;
-//         let player1 = [];
-//         let player2 = [];
-
-//         const combos = [
-//             [0, 1, 2],
-//             [3, 4, 5],
-//             [6, 7, 8],
-//             [0, 3, 6],
-//             [1, 4, 7],
-//             [2, 5, 8],
-//             [0, 4, 8],
-//             [2, 4, 6]
-//         ];
-//     }
+    
+    //ckeckWhoWon();
+        
+    //  const player1 = $(e.target).hasClass('box-fill-1')
+    //  const player2 = $(e.target).hasClass('box-fill-2') 
+    
+    //  const ulBoxes = document.querySelector('.boxes'); // <ul>
+    //  const liBoxes = ulBoxes.querySelectorAll('li'); // todos los <li> de <ul>
+    
+    // let counter = 0;
+    // const combos = [
+    //      [0, 1, 2],
+    //      [3, 4, 5],
+    //      [6, 7, 8],
+    //      [0, 3, 6],
+    //      [1, 4, 7],
+    //      [2, 5, 8],
+    //      [0, 4, 8],
+    //      [2, 4, 6]
+    //  ];
      
+    //  for (let i = 0; i < combos.length; i++) {
+    //         let acum = 0; 
+    //     for (let j = 0; combos[i].length; j++) {
+    //          if (!$(liBoxes).hasClass('box-filled-1'))
+    //              break;
+    //          acum++;
+
+    //      }
+    //      if (acum == 3){
+    //      console.log('works')
+    //     }
+
+    //     }
+    //  for (let i = 0; i < liBoxes.length; i++) {
+            //      let box1;
+            //      box1 = liBoxes;
+            //      console.log(box1);
+             
+
+            //      if ($(e.target.id[0]).hasClass('box-filled-1') && $(e.target.id[1]).hasClass('box-filled-1') && $(e.target.id[2]).hasClass('box-filled-1')  ) {
+            //         console.log('funciona box1 [0,1,2]')
+            //  }
+           // }
+    //  if (counter > 1) {
+    //      start.hide();
+    //  }
+    //  if (counter > 4) {
+
+    //  }
+
+     
+     
+     
+            //if ($(element.id).hasClass('box-filled-1') === $(element.id[0]).hasClass('box-filled-1') && $(element.id[1]).hasClass('box-filled-1') && $(element.id[2]).hasClass('box-filled-1')){
+            // console.log(`works ckecWin  ${element.id}`)
+        // if ($(element.id).hasClass('box-filled-1') === $(element.id[1]).hasClass('box-filled-1')) {
+        //      if ($(element.id).hasClass('box-filled-1') === $(element.id[2]).hasClass('box-filled-1')) {
+             
+        //      }
+        // }
+    //}
+//}
+    // ckeckWin(e);
     // dando click a los elemntos <li> de la lista <ul>
     $('.box').on('click', (e) => {
-        console.log(`element with ID ${e.target.id} clicked`);
+        console.log(`element with ID ${e.target.id} has been clicked`);
         
         if (!$(e.target).hasClass('box-filled-1') && !$(e.target).hasClass('box-filled-2')) { 
 
             fillingBox(e);
+            
             switchP(e);
+            ckeckWhoWon(e);
         //checkWin()  
         if ($('#player1').hasClass('active') ) {
             if ($(e.target).hasClass('box-filled-1') && $(e.target).hasClass('box-filled-2') ) {  // Both have to be TRUE
@@ -97,6 +176,7 @@ const liBoxes = ulBoxes.querySelectorAll('li');
         } else {
             $('#player1').addClass('active')
         }
+            // ckeckWhoWon(e);
     }
 
         if ($('#player2').hasClass('active')) {
@@ -106,10 +186,12 @@ const liBoxes = ulBoxes.querySelectorAll('li');
             } else {
                 $('#player2').addClass('active')
             }
+            // ckeckWhoWon(e);
         }
-
+            //ckeckWhoWon(e);
         
     }
+         //ckeckWhoWon(e);
     });
 
 
@@ -161,7 +243,7 @@ $('.box').on('mouseout', (e) => {
 mouseOut()
 const fillingBox = (e) => {  // esta funcion se ejecuta cuando se da click al tablero
 
-    let counter = 0;
+    //let counter = 0;
     let player1 = [];
     let player2 = [];
 
@@ -170,54 +252,42 @@ const fillingBox = (e) => {  // esta funcion se ejecuta cuando se da click al ta
         if ($('#player1').hasClass('active')) {
             $(e.target).addClass('box-filled-1').css('background-image', 'url(./img/o.svg)');
             player1.push(e.target.id); 
-            console.log(`1 ${player1}`);
+            console.log(`player1 (o) has been clicked element with ID${player1}`);
 
         } else if ($('#player2').hasClass('active')) {
             $(e.target).addClass('box-filled-2').css('background-image', 'url(./img/x.svg)');
             player2.push(e.target.id);
-            console.log(`2 ${player2}`);
+            console.log(`player2  (x) has been clicked element with ID${player2}`);
 
         } 
        
     }
 }
-const boxElement = (e) => {
-    console.log('boxElement function works');
-
-     if ($('#player1').hasClass('active')) {
-            $(e.target).addClass('box-filled-1').css('background-image', 'url(./img/o.svg)');
-        } else if ($('#player2').hasClass('active')) {
-            $(e.target).addClass('box-filled-2').css('background-image', 'url(./img/x.svg)');
-        }
-    }
 
 //Funcion que intercambia el turno del jugador
 const switchP = (e) => {
-
-   
-    console.log('switchPlayer function works');
         
-    //if (!$(e.target).hasClass('box-filled-1') && !$(e.target).hasClass('box-filled-2')) {
+    
             if ($('#player1').hasClass('active') ) {
-                console.log('switchP 1')
+                //console.log('switchP 1')
              $('#player1').removeClass('active');
              $('#player2').addClass('active');
             
             } else {
-            //if ($('#player2').hasClass('active')) {
-                console.log('switchP 2')
+            
+                //console.log('switchP 2')
 
                 $('#player2').removeClass('active');
                 $('#player1').addClass('active');
             
             } if ($('#player1').hasClass('active') && $(e.target).hasClass('box-filled-1')){
-                console.log('switchP 3');
+               // console.log('switchP 3');
                 $('#player2').removeClass('active')
             } else if ($('#player2').hasClass('active') && $(e.target).hasClass('box-filled-2')) {
-                console.log('switchP 4');
+                //console.log('switchP 4');
                 $('#player1').removeClass('active')
             }
-        //} 
+       
     }
    
     $('.button').on('click', () => {
@@ -226,14 +296,5 @@ const switchP = (e) => {
            }           
     });
        
-    const combos = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6]
-    ];
+    
 });
