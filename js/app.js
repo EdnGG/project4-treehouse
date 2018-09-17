@@ -51,12 +51,7 @@ const liBoxes = ulBoxes.querySelectorAll('li');
         box = liBoxes[i].id = i;
         //console.log(box);
     }
-
- //const ckeckWin = (e) => {
-
-
-   
-     const ckeckWhoWon = (e) => {
+     const ckeckWhoWon = (playerClass) => {
 
         const combos = [
              [0, 1, 2],
@@ -68,96 +63,24 @@ const liBoxes = ulBoxes.querySelectorAll('li');
              [0, 4, 8],
              [2, 4, 6]
          ];
-playerClass1 = $(e.target).hasClass("box-filled-1");       
-playerClass2 = $(e.target).hasClass("box-filled-2");
 
          const cuadricula = document.querySelectorAll('li.box');
          let acum = 0;
          for (let i = 0; i < combos.length; i++) { // Recorre el Array bidimensinal combos en el index del primer objeto
              acum = 0;
              for (let j = 0; j < combos[i].length; j++) { // Recorre el Array bidimensional combos el cual recorre el primer objetos del array 
-                 if (!$(cuadricula[combos[i][j]]).hasClass('box-filled-1')  ) {
-                    console.log('recorriendo el array combos')
-                        //acum++;
-                       break;
-                        //acum++;
+                 if (!$(cuadricula[combos[i][j]]).hasClass(playerClass)  )   // si en la cuadricula no existe ninguna de las clases de los jugadores
+                     break; 
+                    acum++;
                  
                 if (acum === 3) {
-                // if () {} 
-                
-                console.log('winner');
-                 //winner
-                // break;
+                    console.log('winner');
+                 
                 }
-             }
-            }
-      } 
-    }
-        
-    
-    //ckeckWhoWon();
-        
-    //  const player1 = $(e.target).hasClass('box-fill-1')
-    //  const player2 = $(e.target).hasClass('box-fill-2') 
-    
-    //  const ulBoxes = document.querySelector('.boxes'); // <ul>
-    //  const liBoxes = ulBoxes.querySelectorAll('li'); // todos los <li> de <ul>
-    
-    // let counter = 0;
-    // const combos = [
-    //      [0, 1, 2],
-    //      [3, 4, 5],
-    //      [6, 7, 8],
-    //      [0, 3, 6],
-    //      [1, 4, 7],
-    //      [2, 5, 8],
-    //      [0, 4, 8],
-    //      [2, 4, 6]
-    //  ];
-     
-    //  for (let i = 0; i < combos.length; i++) {
-    //         let acum = 0; 
-    //     for (let j = 0; combos[i].length; j++) {
-    //          if (!$(liBoxes).hasClass('box-filled-1'))
-    //              break;
-    //          acum++;
-
-    //      }
-    //      if (acum == 3){
-    //      console.log('works')
-    //     }
-
-    //     }
-    //  for (let i = 0; i < liBoxes.length; i++) {
-            //      let box1;
-            //      box1 = liBoxes;
-            //      console.log(box1);
-             
-
-            //      if ($(e.target.id[0]).hasClass('box-filled-1') && $(e.target.id[1]).hasClass('box-filled-1') && $(e.target.id[2]).hasClass('box-filled-1')  ) {
-            //         console.log('funciona box1 [0,1,2]')
-            //  }
-           // }
-    //  if (counter > 1) {
-    //      start.hide();
-    //  }
-    //  if (counter > 4) {
-
-    //  }
-
-     
-     
-     
-            //if ($(element.id).hasClass('box-filled-1') === $(element.id[0]).hasClass('box-filled-1') && $(element.id[1]).hasClass('box-filled-1') && $(element.id[2]).hasClass('box-filled-1')){
-            // console.log(`works ckecWin  ${element.id}`)
-        // if ($(element.id).hasClass('box-filled-1') === $(element.id[1]).hasClass('box-filled-1')) {
-        //      if ($(element.id).hasClass('box-filled-1') === $(element.id[2]).hasClass('box-filled-1')) {
-             
-        //      }
-        // }
-    //}
-//}
-    // ckeckWin(e);
+            }  // for2
+        }  // for1
+    } // if
+           
     // dando click a los elemntos <li> de la lista <ul>
     $('.box').on('click', (e) => {
         console.log(`element with ID ${e.target.id} has been clicked`);
@@ -165,10 +88,16 @@ playerClass2 = $(e.target).hasClass("box-filled-2");
         if (!$(e.target).hasClass('box-filled-1') && !$(e.target).hasClass('box-filled-2')) { 
 
             fillingBox(e);
-            
+
+                if ($('#player1').hasClass('active')) {
+                    ckeckWhoWon('box-filled-1')
+                }
+                else if ($('#player2').hasClass('active')){
+                    ckeckWhoWon('box-filled-2')
+                }
+
             switchP(e);
-            ckeckWhoWon(e);
-        //checkWin()  
+            
         if ($('#player1').hasClass('active') ) {
             if ($(e.target).hasClass('box-filled-1') && $(e.target).hasClass('box-filled-2') ) {  // Both have to be TRUE
             $('#player2').addClass('active')
@@ -176,7 +105,7 @@ playerClass2 = $(e.target).hasClass("box-filled-2");
         } else {
             $('#player1').addClass('active')
         }
-            // ckeckWhoWon(e);
+            
     }
 
         if ($('#player2').hasClass('active')) {
@@ -186,13 +115,10 @@ playerClass2 = $(e.target).hasClass("box-filled-2");
             } else {
                 $('#player2').addClass('active')
             }
-            // ckeckWhoWon(e);
+            
         }
-            //ckeckWhoWon(e);
-        
     }
-         //ckeckWhoWon(e);
-    });
+});
 
 
 // Here's the event "mouseover"
