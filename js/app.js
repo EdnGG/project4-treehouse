@@ -51,7 +51,17 @@ const liBoxes = ulBoxes.querySelectorAll('li');
         box = liBoxes[i].id = i;
         //console.log(box);
     }
-     const ckeckWhoWon = (playerClass) => {
+
+    
+    $('#button1').on('click', () => {
+        if (valName()) {
+            startGame();
+
+        }
+
+    });
+
+     const checkWhoWon = (playerClass) => {
          let name1 = $('#name1').val()
          let name2 = $('#name2').val()
         const combos = [
@@ -75,68 +85,73 @@ const liBoxes = ulBoxes.querySelectorAll('li');
                     acum++;
                  
                 if (acum === 3) {
-                    //board.hide();
+                   
                         if ($('#player1').hasClass('active')) {
                             board.hide();
                             $('.message').text(`${name1} Won`)
-
                             winner.addClass('screen-win-one').css('background-image', 'url(./tictactoe-03-winner1.png)').show()
                             console.log('winner player 1');
+                            return
                         }  
                         if ($('#player2').hasClass('active')){
                             board.hide();
                             $('.message').text(`${name2} Won`)
                             winner.addClass('screen-win-two').css('background-image', 'url(./tictactoe-04-winner2.png)').show()
-                            
                             console.log('winner player 2');
+                            return
                         }
-                         
-                        // if (acum === 8) {
-                        //     board.hide();
-                        //     winner.addClass('screen-win-tie').show()
-                        //     console.log('its a tie');
-                        // }
                 }
-
-                if (acum === 8) {
-                    board.hide();
-                    winner.addClass('screen-win-tie').show()
-                    console.log('its a tie');
-
-                }
-
             }  
         }  
-    } 
+         if ($(cuadricula).find('.box-filled-1  .box-filled-2').length === 8) {
+             console.log(`It's a tie!!`)
+            board.hide();
+            $('.message').text(`It's a tie!!`)
+            winner.addClass('screen-win-tie').show()
+             
+        }       
+    }
+ 
            
     // dando click a los elemntos <li> de la lista <ul>
     $('.box').on('click', (e) => {
         console.log(`element with ID ${e.target.id} has been clicked`);
-        
+        const cuadricula = document.querySelectorAll('li.box');
+
         if (!$(e.target).hasClass('box-filled-1') && !$(e.target).hasClass('box-filled-2')) { 
 
             fillingBox(e);
 
                 if ($('#player1').hasClass('active')) {
-                    ckeckWhoWon('box-filled-1')
-                    //board.hide()
+                    checkWhoWon('box-filled-1')
+                   
                 }
-                else if ($('#player2').hasClass('active')){
-                    ckeckWhoWon('box-filled-2')
-                    //board.hide()
-                }
+                if ($('#player2').hasClass('active')){
+                    checkWhoWon('box-filled-2')
+                    
+                } 
+               
+
+                
+
+                if ($(cuadricula).find('.box-filled-1  .box-filled-2').length === 9) {
+                    console.log(`It's a tied game!!`)
+                    board.hide();
+                    $('.message').text(`It's a tied game!!`)
+                    winner.addClass('screen-win-tie').show()
+                    
+                 }       
 
             switchP(e);
-            
+            //checkWhoWon();
         if ($('#player1').hasClass('active') ) {
             if ($(e.target).hasClass('box-filled-1') && $(e.target).hasClass('box-filled-2') ) {  // Both have to be TRUE
             $('#player2').addClass('active')
             
-        } else {
-            $('#player1').addClass('active')
+            } else {
+              $('#player1').addClass('active')
+            }
         }
-            
-    }
 
         if ($('#player2').hasClass('active')) {
             if ($(e.target).hasClass('box-filled-1') && $(e.target).hasClass('box-filled-2')) {  // Both have to be TRUE
@@ -231,16 +246,16 @@ const switchP = (e) => {
             
             } else {
             
-                //console.log('switchP 2')
+               
 
                 $('#player2').removeClass('active');
                 $('#player1').addClass('active');
             
             } if ($('#player1').hasClass('active') && $(e.target).hasClass('box-filled-1')){
-               // console.log('switchP 3');
+               
                 $('#player2').removeClass('active')
             } else if ($('#player2').hasClass('active') && $(e.target).hasClass('box-filled-2')) {
-                //console.log('switchP 4');
+               
                 $('#player1').removeClass('active')
             }
        
