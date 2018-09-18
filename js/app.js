@@ -53,6 +53,7 @@ const liBoxes = ulBoxes.querySelectorAll('li');
     }
 
     
+    // evento 'click' para reiniciar el juego
     $('#button1').on('click', () => {
         if (valName()) {
             startGame();
@@ -61,7 +62,8 @@ const liBoxes = ulBoxes.querySelectorAll('li');
 
     });
 
-     const checkWhoWon = (playerClass) => {
+     // Checando quien gano el juego
+    const checkWhoWon = (playerClass) => {
          let name1 = $('#name1').val()
          let name2 = $('#name2').val()
         const combos = [
@@ -130,11 +132,7 @@ const liBoxes = ulBoxes.querySelectorAll('li');
                     checkWhoWon('box-filled-2')
                     
                 } 
-               
-
-                
-
-                if ($(cuadricula).find('.box-filled-1  .box-filled-2').length === 9) {
+               if ($(cuadricula).find('.box-filled-1  .box-filled-2').length === 9) {
                     console.log(`It's a tied game!!`)
                     board.hide();
                     $('.message').text(`It's a tied game!!`)
@@ -238,16 +236,13 @@ const fillingBox = (e) => {  // esta funcion se ejecuta cuando se da click al ta
 //Funcion que intercambia el turno del jugador
 const switchP = (e) => {
         
-    
             if ($('#player1').hasClass('active') ) {
                 //console.log('switchP 1')
-             $('#player1').removeClass('active');
-             $('#player2').addClass('active');
+                $('#player1').removeClass('active');
+                $('#player2').addClass('active');
             
             } else {
             
-               
-
                 $('#player2').removeClass('active');
                 $('#player1').addClass('active');
             
@@ -261,6 +256,7 @@ const switchP = (e) => {
        
     }
    
+    // Inicio del juego
     $('.button').on('click', () => {
            if (valName() ) {
                 startGame(); 
