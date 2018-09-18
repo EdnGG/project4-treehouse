@@ -74,8 +74,22 @@ const liBoxes = ulBoxes.querySelectorAll('li');
                     acum++;
                  
                 if (acum === 3) {
-                    console.log('winner');
-                 
+                    //board.hide();
+                        if ($('#player1').hasClass('active')) {
+                            board.hide();
+                            winner.addClass('screen-win-one').css('background-image', 'url(./tictactoe-03-winner1.png)').show()
+                            console.log('winner player 1');
+                        } else if ($('#player2').hasClass('active')){
+                            board.hide();
+                            winner.addClass('screen-win-two').css('background-image', 'url(./tictactoe-04-winner2.png)').show()
+                            console.log('winner player 2');
+
+                        } else if (!$('#player1').hasClass('active') && !$('#player2').hasClass('active') ){
+                            board.hide();
+                            winner.addClass('screen-win-tie').show()
+                            console.log('its a tie');
+
+                        }
                 }
             }  // for2
         }  // for1
@@ -91,9 +105,11 @@ const liBoxes = ulBoxes.querySelectorAll('li');
 
                 if ($('#player1').hasClass('active')) {
                     ckeckWhoWon('box-filled-1')
+                    //board.hide()
                 }
                 else if ($('#player2').hasClass('active')){
                     ckeckWhoWon('box-filled-2')
+                    //board.hide()
                 }
 
             switchP(e);
