@@ -52,7 +52,8 @@ const liBoxes = ulBoxes.querySelectorAll('li');
         //console.log(box);
     }
      const ckeckWhoWon = (playerClass) => {
-
+         let name1 = $('#name1').val()
+         let name2 = $('#name2').val()
         const combos = [
              [0, 1, 2],
              [3, 4, 5],
@@ -77,23 +78,36 @@ const liBoxes = ulBoxes.querySelectorAll('li');
                     //board.hide();
                         if ($('#player1').hasClass('active')) {
                             board.hide();
+                            $('.message').text(`${name1} Won`)
+
                             winner.addClass('screen-win-one').css('background-image', 'url(./tictactoe-03-winner1.png)').show()
                             console.log('winner player 1');
-                        } else if ($('#player2').hasClass('active')){
+                        }  
+                        if ($('#player2').hasClass('active')){
                             board.hide();
+                            $('.message').text(`${name2} Won`)
                             winner.addClass('screen-win-two').css('background-image', 'url(./tictactoe-04-winner2.png)').show()
+                            
                             console.log('winner player 2');
-
-                        } else if (!$('#player1').hasClass('active') && !$('#player2').hasClass('active') ){
-                            board.hide();
-                            winner.addClass('screen-win-tie').show()
-                            console.log('its a tie');
-
                         }
+                         
+                        // if (acum === 8) {
+                        //     board.hide();
+                        //     winner.addClass('screen-win-tie').show()
+                        //     console.log('its a tie');
+                        // }
                 }
-            }  // for2
-        }  // for1
-    } // if
+
+                if (acum === 8) {
+                    board.hide();
+                    winner.addClass('screen-win-tie').show()
+                    console.log('its a tie');
+
+                }
+
+            }  
+        }  
+    } 
            
     // dando click a los elemntos <li> de la lista <ul>
     $('.box').on('click', (e) => {
