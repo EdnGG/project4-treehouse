@@ -132,7 +132,7 @@ const liBoxes = ulBoxes.querySelectorAll('li');
                     checkWhoWon('box-filled-2')
                     
                 } 
-               if ($(cuadricula).find('.box-filled-1  .box-filled-2').length === 9) {
+                if (($('.box-filled-1').length + $('.box-filled-2').length) === 9) {
                     console.log(`It's a tied game!!`)
                     board.hide();
                     $('.message').text(`It's a tied game!!`)
