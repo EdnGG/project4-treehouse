@@ -68,6 +68,9 @@ const liBoxes = ulBoxes.querySelectorAll('li');
     const restartGame = () => {
         const cuadricula = document.querySelectorAll('li.box');
          
+        winner.removeClass('screen-win-one');
+        winner.removeClass('screen-win-two');
+        winner.removeClass('screen-win-tie');
             $(cuadricula).each((index, item) => {
                 
                 $(item).removeClass("box-filled-1").css('background-image', 'none');
@@ -104,6 +107,8 @@ const liBoxes = ulBoxes.querySelectorAll('li');
                         if ($('#player1').hasClass('active')) {
                             board.hide();
                             $('.message').text(`${name1} Won`)
+                            //winner.removeClass('screen-win-tie');
+                            //winner.removeClass('screen-win-two');
                             winner.addClass('screen-win-one').css('background-image', 'url(./tictactoe-03-winner1.png)').show()
                             console.log('winner player 1');
                             return
@@ -111,6 +116,9 @@ const liBoxes = ulBoxes.querySelectorAll('li');
                         if ($('#player2').hasClass('active')){
                             board.hide();
                             $('.message').text(`${name2} Won`)
+                            //winner.removeClass('screen-win-one')
+                            //winner.removeClass('screen-win-tie');
+
                             winner.addClass('screen-win-two').css('background-image', 'url(./tictactoe-04-winner2.png)').show()
                             console.log('winner player 2');
                             return
@@ -118,7 +126,14 @@ const liBoxes = ulBoxes.querySelectorAll('li');
                 }
             }  
         }  
-       
+        if (($('.box-filled-1').length + $('.box-filled-2').length) === 9) {
+            console.log(`It's a tied game!!`)
+            board.hide();
+            $('.message').text(`It's a tied game!!`)
+            //winner.removeClass('screen-win-one');
+            //winner.removeClass('screen-win-two');
+            winner.addClass('screen-win-tie').show()
+        }
     }
  
            
@@ -139,13 +154,13 @@ const liBoxes = ulBoxes.querySelectorAll('li');
                     checkWhoWon('box-filled-2')
                     
                 } 
-                if (($('.box-filled-1').length + $('.box-filled-2').length) === 9) {
-                    console.log(`It's a tied game!!`)
-                    board.hide();
-                    $('.message').text(`It's a tied game!!`)
-                    winner.addClass('screen-win-tie').show()
+                // if (($('.box-filled-1').length + $('.box-filled-2').length) === 9) {
+                //     console.log(`It's a tied game!!`)
+                //     board.hide();
+                //     $('.message').text(`It's a tied game!!`)
+                //     winner.addClass('screen-win-tie').show()
                     
-                 }       
+                //  }       
 
             switchP(e);
             
