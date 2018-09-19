@@ -37,7 +37,8 @@ $( document ).ready ( () => {
                 $('#player2').removeClass('active');
             }
                 
-        } else if ($('#player2').hasClass('active')) {
+        } 
+        if ($('#player2').hasClass('active')) {
             $('#player1').removeClass('active');
         }
     }
@@ -54,15 +55,32 @@ const liBoxes = ulBoxes.querySelectorAll('li');
 
     
     // evento 'click' para reiniciar el juego
-    $('#button1').on('click', () => {
-        if (valName()) {
-            startGame();
+    $('.screen-win .button').on('click', () => {
+         //if (valName()) {
+        //startGame();
+        restartGame();   
+        
 
-        }
+         //}
 
     });
 
-     // Checando quien gano el juego
+    const restartGame = () => {
+        const cuadricula = document.querySelectorAll('li.box');
+        startGame();  
+            $(cuadricula).each((index, item) => {
+                
+                $(item).removeClass("box-filled-1").css('background-image', 'none');
+                $(item).removeClass("box-filled-2").css('background-image', 'none');
+                
+            });
+            
+            winner.hide();
+            board.show();
+       
+    };
+
+  // Checando quien gano el juego
     const checkWhoWon = (playerClass) => {
          let name1 = $('#name1').val()
          let name2 = $('#name2').val()
@@ -105,20 +123,14 @@ const liBoxes = ulBoxes.querySelectorAll('li');
                 }
             }  
         }  
-         if ($(cuadricula).find('.box-filled-1  .box-filled-2').length === 8) {
-             console.log(`It's a tie!!`)
-            board.hide();
-            $('.message').text(`It's a tie!!`)
-            winner.addClass('screen-win-tie').show()
-             
-        }       
+       
     }
  
            
     // dando click a los elemntos <li> de la lista <ul>
     $('.box').on('click', (e) => {
         console.log(`element with ID ${e.target.id} has been clicked`);
-        const cuadricula = document.querySelectorAll('li.box');
+        
 
         if (!$(e.target).hasClass('box-filled-1') && !$(e.target).hasClass('box-filled-2')) { 
 
@@ -141,7 +153,7 @@ const liBoxes = ulBoxes.querySelectorAll('li');
                  }       
 
             switchP(e);
-            //checkWhoWon();
+            
         if ($('#player1').hasClass('active') ) {
             if ($(e.target).hasClass('box-filled-1') && $(e.target).hasClass('box-filled-2') ) {  // Both have to be TRUE
             $('#player2').addClass('active')
@@ -165,7 +177,7 @@ const liBoxes = ulBoxes.querySelectorAll('li');
 
 
 // Here's the event "mouseover"
-const mouseOver = ()=> {
+// const mouseOver = ()=> {
 $('.box').on('mouseover', (e) => {
         
     if (!$(e.target).hasClass('box-filled-1') && !$(e.target).hasClass('box-filled-2') ) { // negacion
@@ -188,11 +200,11 @@ $('.box').on('mouseover', (e) => {
        
     }
   })
-}
-mouseOver()
+// }
+// mouseOver()
 
 // Here's the event "mouseout"
-const mouseOut = () => { 
+// const mouseOut = () => { 
 $('.box').on('mouseout', (e) => {
         if (!$(e.target).hasClass('box-filled-1') && !$(e.target).hasClass('box-filled-2')) {
             if($(e.target).hasClass('box-filled-1')){
@@ -207,9 +219,9 @@ $('.box').on('mouseout', (e) => {
             }
         }
     })
-}
+// }
 
-mouseOut()
+// mouseOut()
 const fillingBox = (e) => {  // esta funcion se ejecuta cuando se da click al tablero
 
     //let counter = 0;
