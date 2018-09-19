@@ -32,13 +32,14 @@ $( document ).ready ( () => {
 
     const startGame = () => {
         let randomNumber = Math.floor(Math.random() * 2  +  1); // number between 0 and 2
+        console.log(randomNumber)
         if (randomNumber === 1) {
             if ($('#player1').hasClass('active')) {
                 $('#player2').removeClass('active');
             }
                 
         } 
-        if ($('#player2').hasClass('active')) {
+        else if ($('#player2').hasClass('active')) {
             $('#player1').removeClass('active');
         }
     }
@@ -50,35 +51,29 @@ const liBoxes = ulBoxes.querySelectorAll('li');
     for (let i = 0; i < liBoxes.length; i++) {
         let box;
         box = liBoxes[i].id = i;
-        //console.log(box);
+        
     }
 
     
     // evento 'click' para reiniciar el juego
     $('.screen-win .button').on('click', () => {
-         //if (valName()) {
-        //startGame();
-        restartGame();   
         
-
-         //}
+        $('#finish').hide();
+        startGame();
+        restartGame();   
+        $('#board').show();
 
     });
 
     const restartGame = () => {
         const cuadricula = document.querySelectorAll('li.box');
-        startGame();  
+         
             $(cuadricula).each((index, item) => {
                 
                 $(item).removeClass("box-filled-1").css('background-image', 'none');
                 $(item).removeClass("box-filled-2").css('background-image', 'none');
-                
             });
-            
-            winner.hide();
-            board.show();
-       
-    };
+        };
 
   // Checando quien gano el juego
     const checkWhoWon = (playerClass) => {
@@ -177,7 +172,7 @@ const liBoxes = ulBoxes.querySelectorAll('li');
 
 
 // Here's the event "mouseover"
-// const mouseOver = ()=> {
+
 $('.box').on('mouseover', (e) => {
         
     if (!$(e.target).hasClass('box-filled-1') && !$(e.target).hasClass('box-filled-2') ) { // negacion
@@ -200,11 +195,9 @@ $('.box').on('mouseover', (e) => {
        
     }
   })
-// }
-// mouseOver()
 
 // Here's the event "mouseout"
-// const mouseOut = () => { 
+ 
 $('.box').on('mouseout', (e) => {
         if (!$(e.target).hasClass('box-filled-1') && !$(e.target).hasClass('box-filled-2')) {
             if($(e.target).hasClass('box-filled-1')){
@@ -219,12 +212,9 @@ $('.box').on('mouseout', (e) => {
             }
         }
     })
-// }
 
-// mouseOut()
 const fillingBox = (e) => {  // esta funcion se ejecuta cuando se da click al tablero
 
-    //let counter = 0;
     let player1 = [];
     let player2 = [];
 
@@ -275,5 +265,4 @@ const switchP = (e) => {
            }           
     });
        
-    
 });
